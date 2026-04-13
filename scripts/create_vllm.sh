@@ -19,3 +19,5 @@ exec vllm serve "${MODEL_PATH}" \
   --enable-auto-tool-choice \
   --tool-call-parser "${TOOL_CALL_PARSER}" \
   "$@"
+
+

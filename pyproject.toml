@@ -64,8 +64,8 @@ code_interpreter = [
     "uvicorn>=0.23.2",
 ]
 gui = [
-    "pydantic==2.9.2",
-    "pydantic-core==2.23.4",
+    "pydantic==2.12.0",
+    "pydantic-core==2.41.1",
     "gradio==5.23.1",
     "gradio-client==1.8.0",
     "modelscope_studio==1.1.7",
@@ -91,16 +91,8 @@ qwen_agent = [
 
 [dependency-groups]
 vllm = [
-    "vllm",
+    "vllm==0.15.0",
 ]
-
-[tool.uv.sources]
-vllm = { index = "vllm-nightly" }
-
-[[tool.uv.index]]
-name = "vllm-nightly"
-url = "https://wheels.vllm.ai/nightly"
-explicit = true
 
 [tool.uv.pip]
 torch-backend = "auto"
