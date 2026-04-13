@@ -71,8 +71,13 @@ gui = [
     "modelscope_studio==1.1.7",
 ]
 
+vllm = [
+    "vllm==0.15.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/QwenLM/Qwen-Agent"
+
 
 [tool.setuptools]
 include-package-data = true
@@ -89,10 +94,6 @@ qwen_agent = [
     "gui/assets/*.jpeg",
 ]
 
-[dependency-groups]
-vllm = [
-    "vllm==0.15.0",
-]
 
 [tool.uv.pip]
 torch-backend = "auto"
