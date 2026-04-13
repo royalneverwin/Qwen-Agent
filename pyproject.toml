@@ -1,0 +1,106 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qwen-agent"
+version = "0.0.34"
+description = "Qwen-Agent: Enhancing LLMs with Agent Workflows, RAG, Function Calling, and Code Interpreter."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Qwen Team", email = "tujianhong.tjh@alibaba-inc.com" },
+]
+keywords = ["LLM", "Agent", "Function Calling", "RAG", "Code Interpreter"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "dashscope>=1.11.0",
+    "eval_type_backport",
+    "json5",
+    "jsonlines",
+    "jsonschema",
+    "openai",
+    "pydantic>=2.3.0",
+    "requests",
+    "tiktoken",
+    "pillow",
+    "dotenv",
+]
+
+[project.optional-dependencies]
+rag = [
+    "charset-normalizer",
+    "rank_bm25",
+    "jieba",
+    "snowballstemmer",
+    "beautifulsoup4",
+    "pdfminer.six",
+    "pdfplumber",
+    "python-docx",
+    "python-pptx",
+    "pandas",
+    "tabulate",
+]
+mcp = [
+    "mcp",
+]
+python_executor = [
+    "pebble",
+    "multiprocess",
+    "timeout_decorator",
+    "python-dateutil",
+    "sympy",
+    "numpy",
+    "scipy",
+]
+code_interpreter = [
+    "anyio>=3.7.1",
+    "fastapi>=0.103.1",
+    "jupyter>=1.0.0",
+    "uvicorn>=0.23.2",
+]
+gui = [
+    "pydantic==2.9.2",
+    "pydantic-core==2.23.4",
+    "gradio==5.23.1",
+    "gradio-client==1.8.0",
+    "modelscope_studio==1.1.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/QwenLM/Qwen-Agent"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+exclude = ["examples", "examples.*", "qwen_server", "qwen_server.*"]
+
+[tool.setuptools.package-data]
+qwen_agent = [
+    "utils/qwen.tiktoken",
+    "tools/resource/*.ttf",
+    "tools/resource/*.py",
+    "gui/assets/*.css",
+    "gui/assets/*.jpeg",
+]
+
+[dependency-groups]
+vllm = [
+    "vllm",
+]
+
+[tool.uv.sources]
+vllm = { index = "vllm-nightly" }
+
+[[tool.uv.index]]
+name = "vllm-nightly"
+url = "https://wheels.vllm.ai/nightly"
+explicit = true
+
+[tool.uv.pip]
+torch-backend = "auto"
