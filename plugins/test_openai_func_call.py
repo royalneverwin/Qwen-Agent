@@ -6,18 +6,21 @@ import random
 
 cfg = {
     'api_key': 'empty',
-    'base_url': "http://{}/v1".format("[fdbd:dc55:2:1603::21]:10365"),
-    'model_name': 'pistis'
+    # qwen3.5
+    # 'base_url': "http://{}/v1".format("[fdbd:dc53:53:500::58]:10872"),
+    # qwen3 coder next
+    'base_url': "http://{}/v1".format("[fdbd:dccd:cdc1:1302:0:50::]:10022"),
+    'model_name': 'qwen3'
 }
 
 client = OpenAI(
     api_key=cfg['api_key'],
     base_url=cfg['base_url'],
-    default_headers={"Destination-Service": "lab.pistis_demo.test"} if cfg['api_key'] == 'empty' else {},
+    default_headers={"Destination-Service": "ad.integrity.qwen3_coder_next_80b_a3b"} if cfg['api_key'] == 'empty' else {},
 )
 
 # 模拟用户问题
-USER_QUESTION = "上海天气咋样呢？"
+USER_QUESTION = "北京天气咋样呢？"
 # 定义工具列表
 tools = [
     {
