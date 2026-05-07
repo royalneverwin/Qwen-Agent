@@ -32,3 +32,5 @@ case "${UV_LOCK_MODE}" in
         exit 2
         ;;
 esac
+
+source .venv/bin/activate
