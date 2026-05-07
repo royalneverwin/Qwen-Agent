@@ -9,19 +9,26 @@ set -euo pipefail
 PYTHON_VERSION="${PYTHON_VERSION:-3.10}"
 UV_LOCK_MODE="${UV_LOCK_MODE:-update}"
 QWEN_AGENT_EXTRAS="${QWEN_AGENT_EXTRAS:-vllm gui rag code_interpreter mcp}"
+EXPECTED_TORCH_CUDA="${EXPECTED_TORCH_CUDA:-12.9}"
 
 sync_args=(--python "${PYTHON_VERSION}" --no-dev)
 for extra in ${QWEN_AGENT_EXTRAS//,/ }; do
     sync_args+=(--extra "${extra}")
 done
 
+lock_args=(--python "${PYTHON_VERSION}")
+torch_packages=(vllm torch torchvision torchaudio)
+
 case "${UV_LOCK_MODE}" in
     update)
-        uv lock --python "${PYTHON_VERSION}"
+        for package in "${torch_packages[@]}"; do
+            lock_args+=(--upgrade-package "${package}")
+        done
+        uv lock "${lock_args[@]}"
         uv sync --locked "${sync_args[@]}"
         ;;
     check)
-        uv lock --check --python "${PYTHON_VERSION}"
+        uv lock --check "${lock_args[@]}"
         uv sync --locked "${sync_args[@]}"
         ;;
     frozen)
@@ -33,4 +40,4 @@ case "${UV_LOCK_MODE}" in
         ;;
 esac
 
-source .venv/bin/activate
+.venv/bin/python -c 'import sys, torch; expected = sys.argv[1]; actual = torch.version.cuda; print(f"torch: {torch.__version__}, torch cuda: {actual}"); sys.exit(0 if actual == expected else f"Expected torch CUDA {expected}, got {actual}")' "${EXPECTED_TORCH_CUDA}"
