@@ -79,11 +79,11 @@ vllm = [
 Homepage = "https://github.com/QwenLM/Qwen-Agent"
 
 [tool.uv.sources]
-vllm = { index = "vllm-nightly" }
+vllm = { index = "vllm-nightly-cu129" }
 
 [[tool.uv.index]]
-name = "vllm-nightly"
-url = "https://wheels.vllm.ai/nightly"
+name = "vllm-nightly-cu129"
+url = "https://wheels.vllm.ai/nightly/cu129"
 explicit = true
 
 [tool.setuptools]
@@ -103,4 +103,4 @@ qwen_agent = [
 
 
 [tool.uv.pip]
-torch-backend = "auto"
+torch-backend = "cu129"
