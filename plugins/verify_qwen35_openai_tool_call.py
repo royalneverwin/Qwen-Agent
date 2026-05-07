@@ -8,10 +8,15 @@ from typing import Any, Dict, Iterable, List, Optional
 
 from openai import OpenAI
 
+# qwen3.5
+# DEFAULT_BASE_URL = "http://[fdbd:dc53:50:602::19]:9656/v1"
+# DEFAULT_DESTINATION_SERVICE = "ad.integrity.qwen35_35b_a3b"
+# qwen3 coder next
+DEFAULT_BASE_URL = "http://[fdbd:dccd:cdc1:1302:0:50::]:10022/v1"
+DEFAULT_DESTINATION_SERVICE = "ad.integrity.qwen3_coder_next_80b_a3b"
 
-DEFAULT_BASE_URL = "http://[fdbd:dc53:53:500::58]:10872/v1"
 DEFAULT_API_KEY = "empty"
-DEFAULT_MODEL = "pistis_agentic"
+DEFAULT_MODEL = "qwen_agentic"
 DEFAULT_TICKET = "tool_call_probe"
 DEFAULT_ANSWER = "tool-call-pass-1729"
 
@@ -46,7 +51,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", default=DEFAULT_MODEL, help="Model name passed to chat.completions.create.")
     parser.add_argument(
         "--destination-service",
-        default="",
+        default=DEFAULT_DESTINATION_SERVICE,
         help="Optional Destination-Service header for internal gateways when api_key=empty.",
     )
     parser.add_argument("--ticket", default=DEFAULT_TICKET, help="Expected probe ticket passed to the tool.")

@@ -7,16 +7,19 @@ import random
 cfg = {
     'api_key': 'empty',
     # qwen3.5
-    # 'base_url': "http://{}/v1".format("[fdbd:dc53:53:500::58]:10872"),
+    'base_url': "http://{}/v1".format("[fdbd:dc53:50:602::19]:9656"),
     # qwen3 coder next
-    'base_url': "http://{}/v1".format("[fdbd:dccd:cdc1:1302:0:50::]:10022"),
-    'model_name': 'qwen3'
+    # 'base_url': "http://{}/v1".format("[fdbd:dccd:cdc1:1302:0:50::]:10022"),
+    'model_name': 'qwen3.5'
 }
 
 client = OpenAI(
     api_key=cfg['api_key'],
     base_url=cfg['base_url'],
-    default_headers={"Destination-Service": "ad.integrity.qwen3_coder_next_80b_a3b"} if cfg['api_key'] == 'empty' else {},
+    # qwen3.5 
+    default_headers={"Destination-Service": "ad.integrity.qwen35_35b_a3b"} if cfg['api_key'] == 'empty' else {},
+    # qwen3 coder next
+    # default_headers={"Destination-Service": "ad.integrity.qwen3_coder_next_80b_a3b"} if cfg['api_key'] == 'empty' else {},
 )
 
 # 模拟用户问题
