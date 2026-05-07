@@ -80,10 +80,24 @@ Homepage = "https://github.com/QwenLM/Qwen-Agent"
 
 [tool.uv.sources]
 vllm = { index = "vllm-nightly-cu129" }
+torch = [
+    { index = "pytorch-cu129", marker = "sys_platform == 'linux'" },
+]
+torchvision = [
+    { index = "pytorch-cu129", marker = "sys_platform == 'linux'" },
+]
+torchaudio = [
+    { index = "pytorch-cu129", marker = "sys_platform == 'linux'" },
+]
 
 [[tool.uv.index]]
 name = "vllm-nightly-cu129"
 url = "https://wheels.vllm.ai/nightly/cu129"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu129"
+url = "https://download.pytorch.org/whl/cu129"
 explicit = true
 
 [tool.setuptools]
